@@ -1,0 +1,18 @@
+@import "../../index.scss";
+
+.loginPage {
+  input {
+    width: 100%;
+    padding: 12px 20px;
+    border: 1.25px solid $secondary-blue;
+    border-radius: 8px;
+    outline-color: $secondary-blue;
+    box-sizing: border-box;
+    display: inline-block;
+    font-size: 16px;
+    &::placeholder {
+      color: $secondary-blue;
+      font-weight: 600;
+    }
+  }
+}
