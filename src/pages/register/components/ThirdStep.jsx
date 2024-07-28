@@ -51,6 +51,11 @@ const ThirdStep = ({ data }) => {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    const payload = {
+      step: "step3",
+      data: values,
+    };
+    dispatch(updateFormData(payload));
     registerUser({ ...formData, ...values }).then((res) => {
       if (res.success) {
         alert(res?.message);
@@ -96,7 +101,7 @@ const ThirdStep = ({ data }) => {
               {/* Create Password Input Field */}
               <div className="flex-1 mb-3 flex-col">
                 <label htmlFor="password" className="formLabel">
-                  Full Name (As per Aadhar)
+                  Create Password
                 </label>
                 <Field
                   type="password"
