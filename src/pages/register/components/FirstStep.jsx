@@ -4,8 +4,11 @@ import * as Yup from "yup";
 import Button from "../../../components/Button";
 import { nextStep, updateFormData } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
+import { useState } from "react";
+import { convertToBase64 } from "../../../utils/base64";
 
 const FirstStep = ({ data }) => {
+  const [imagePreview, setImagePreview] = useState(data?.photo || "");
   const dispatch = useDispatch();
   const initialValues = {
     fullName: data?.fullName || "",
@@ -31,7 +34,7 @@ const FirstStep = ({ data }) => {
       district: data?.permanentAddress?.district || "",
       pin: data?.permanentAddress?.pin || "",
     },
-    photo: "",
+    photo: data?.photo || "",
   };
 
   const validationSchema = Yup.object({
@@ -92,8 +95,20 @@ const FirstStep = ({ data }) => {
         .matches(/^\d+$/, "Pin code must contain only numbers")
         .required("Pin code is required"),
     }),
-    photo: Yup.mixed(),
+    photo: Yup.mixed().required("Image is required"),
   });
+
+  const handleImageChange = async (event, setFieldValue) => {
+    const image = event.target.files[0];
+    if (image) {
+      const imgBlob = await convertToBase64(image);
+      setFieldValue("photo", imgBlob);
+      setImagePreview(URL.createObjectURL(image));
+    } else {
+      setFieldValue("photo", "");
+      setImagePreview("");
+    }
+  };
 
   const handleSubmit = (values, { setSubmitting }) => {
     const payload = { step: "step1", data: values };
@@ -108,7 +123,7 @@ const FirstStep = ({ data }) => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting, values }) => (
+      {({ isSubmitting, values, setFieldValue }) => (
         <Form className="flex justify-between flex-col">
           <div className="flex gap-2 flex-wrap-reverse md:gap-14">
             <div className="flex-1">
@@ -503,20 +518,24 @@ const FirstStep = ({ data }) => {
               <label htmlFor="photo" className="cursor-pointer">
                 <div className="border-[1.5px] border-gray-600 rounded-lg p-4 flex flex-col justify-center items-center w-[325px] gap-2">
                   <img
-                    src={values?.photo || "./camera.svg"}
-                    className="h-24 w-24"
+                    src={imagePreview || "./camera.svg"}
+                    className={
+                      imagePreview ? "top-0 left-0 object-contain" : "h-24 w-24"
+                    }
                   ></img>
                   <p className="formLabel">Upload Image</p>
                 </div>
               </label>
-              <Field
-                type="file"
+              <input
                 id="photo"
                 name="photo"
+                type="file"
                 accept="image/*"
-                hidden
+                onChange={(event) => {
+                  handleImageChange(event, setFieldValue);
+                }}
               />
-              <ErrorMessage name="image" component="div" className="error" />
+              <ErrorMessage name="photo" component="div" className="error" />
             </div>
           </div>
           <div className="flex pt-5 justify-center">

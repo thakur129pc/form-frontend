@@ -37,11 +37,14 @@ const ProfilePage = () => {
         <h2 className="py-2 text-2xl font-medium">Personal Information</h2>
         <div className="relative">
           <hr className="w-2/3 border-t-2 border-gray-700" />
-          <img
-            src={user?.photo || "./img.png"}
-            alt="User Image"
-            className="h-48 w-48 object-cover pt-3 sm:absolute sm:pt-0 right-[10%]"
-          />
+          <div className="w-[225px] pt-3 sm:absolute sm:pt-0 right-[10%]">
+            <img
+              src={user?.photo || "./img.png"}
+              className={
+                user?.photo ? "top-0 left-0 object-contain" : "h-48 w-48"
+              }
+            ></img>
+          </div>
         </div>
         <div className="flex pt-3">
           <h2 className="w-[180px] font-medium t ">Full Name :</h2>

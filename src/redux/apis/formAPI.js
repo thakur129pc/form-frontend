@@ -1,16 +1,19 @@
 import apiClient from "../../utils/axios";
 
 export const registerUser = async (params) => {
+  const formData = new FormData();
+  for (const key in params) {
+    formData.append(key, params[key]);
+  }
   try {
-    const result = await apiClient.post("/register", params, {
+    const result = await apiClient.post("/register", formData, {
       headers: {
+        "Content-Type": "multipart/form-data",
         skipAuth: true,
       },
     });
-    console.log(result);
     return result.data;
   } catch (error) {
-    console.log(error);
     if (error.response) {
       const { data } = error.response;
       return data;

@@ -17,17 +17,12 @@ const SecondStep = ({ data }) => {
   };
 
   const validationSchema = Yup.object().shape({
-    document: Yup.array()
-      .of(Yup.string())
-      // .of(
-      //   Yup.object().shape({
-      //     name: Yup.string().required("Document name is required"),
-      //     type: Yup.string().required("Document type is required"),
-      //     size: Yup.number().required("Document size is required"),
-      //   })
-      // )
-      .min(1, "At least one document is required")
-      .max(5, "Maximum 5 documents allowed"),
+    documents: Yup.array().of(
+      Yup.mixed()
+      // .required("A document is required")
+    ),
+    // .min(1, "At least one document is required")
+    // .max(5, "At least one document is required"),
   });
 
   const previousStep = (values) => {
