@@ -35,36 +35,59 @@ const FirstStep = ({ data }) => {
   };
 
   const validationSchema = Yup.object({
-    fullName: Yup.string().required("Name is required"),
+    fullName: Yup.string()
+      .trim()
+      .matches(/^[a-zA-Z\s]+$/, "Name must contain only alphabets")
+      .min(2, "Name must be at least 2 characters")
+      .max(50, "Name cannot exceed 50 characters")
+      .required("Name is required"),
     gender: Yup.string().required("Please select gender"),
     dateOfBirth: Yup.date().required("DOB is required"),
-    fatherName: Yup.string().required("Father name is required"),
-    motherName: Yup.string().required("Mother name is required"),
+    fatherName: Yup.string()
+      .trim()
+      .matches(/^[a-zA-Z\s]+$/, "Name must contain only alphabets")
+      .min(2, "Name must be at least 2 characters")
+      .max(50, "Name cannot exceed 50 characters")
+      .required("Father name is required"),
+    motherName: Yup.string()
+      .trim()
+      .matches(/^[a-zA-Z\s]+$/, "Name must contain only alphabets")
+      .min(2, "Name must be at least 2 characters")
+      .max(50, "Name cannot exceed 50 characters")
+      .required("Mother name is required"),
     maritalStatus: Yup.boolean().required("Please select martial status"),
-    spouseName: Yup.string(),
+    spouseName: Yup.string()
+      .trim()
+      .matches(/^[a-zA-Z\s]+$/, "Name must contain only alphabets")
+      .min(2, "Name must be at least 2 characters")
+      .max(50, "Name cannot exceed 50 characters"),
     phoneNumber: Yup.string()
+      .trim()
       .required("Phone number is required")
       .matches(/^\d{10}$/, "Phone number must be 10 digits")
       .typeError("Phone number must be a number"),
     email: Yup.string()
+      .trim()
       .email("Invalid email address")
       .required("Email is required"),
     currentAddress: Yup.object({
-      street: Yup.string().required("Street is required"),
-      locality: Yup.string().required("Locality is required"),
-      state: Yup.string().required("State is required"),
-      district: Yup.string().required("District is required"),
+      street: Yup.string().trim().required("Street is required"),
+      locality: Yup.string().trim().required("Locality is required"),
+      state: Yup.string().trim().required("State is required"),
+      district: Yup.string().trim().required("District is required"),
       pin: Yup.string()
+        .trim()
         .length(6, "Pin code must be exactly 6 digits")
         .matches(/^\d+$/, "Pin code must contain only numbers")
         .required("Pin code is required"),
     }),
     permanentAddress: Yup.object({
-      street: Yup.string().required("Street is required"),
-      locality: Yup.string().required("Locality is required"),
-      state: Yup.string().required("State is required"),
-      district: Yup.string().required("District is required"),
+      street: Yup.string().trim().required("Street is required"),
+      locality: Yup.string().trim().required("Locality is required"),
+      state: Yup.string().trim().required("State is required"),
+      district: Yup.string().trim().required("District is required"),
       pin: Yup.string()
+        .trim()
         .length(6, "Pin code must be exactly 6 digits")
         .matches(/^\d+$/, "Pin code must contain only numbers")
         .required("Pin code is required"),
@@ -86,7 +109,7 @@ const FirstStep = ({ data }) => {
       onSubmit={handleSubmit}
     >
       {({ isSubmitting, values }) => (
-        <Form>
+        <Form className="flex justify-between flex-col">
           <div className="flex gap-2 flex-wrap-reverse md:gap-14">
             <div className="flex-1">
               <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
@@ -246,20 +269,24 @@ const FirstStep = ({ data }) => {
                 </div>
                 {/* Spouse Name Input Field */}
                 <div className="flex-1 flex-col">
-                  <label htmlFor="spouseName" className="formLabel">
-                    Spouse Name
-                  </label>
-                  <Field
-                    type="text"
-                    id="spouseName"
-                    name="spouseName"
-                    className="formField"
-                  />
-                  <ErrorMessage
-                    name="spouseName"
-                    component="div"
-                    className="error"
-                  />
+                  {values.maritalStatus === "true" && (
+                    <>
+                      <label htmlFor="spouseName" className="formLabel">
+                        Spouse Name
+                      </label>
+                      <Field
+                        type="text"
+                        id="spouseName"
+                        name="spouseName"
+                        className="formField"
+                      />
+                      <ErrorMessage
+                        name="spouseName"
+                        component="div"
+                        className="error"
+                      />
+                    </>
+                  )}
                 </div>
                 <div className="flex-1"></div>
               </div>
@@ -492,7 +519,7 @@ const FirstStep = ({ data }) => {
               <ErrorMessage name="image" component="div" className="error" />
             </div>
           </div>
-          <div className="fixed bottom-0 flex w-[100%] pb-5 justify-center">
+          <div className="flex pt-5 justify-center">
             <Button type="submit" disabled={isSubmitting}>
               Next
             </Button>

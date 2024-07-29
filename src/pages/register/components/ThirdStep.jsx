@@ -6,8 +6,11 @@ import { prevStep, updateFormData } from "../../../redux/slices/formSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../../redux/apis/formAPI";
+import { useState } from "react";
+import Loader from "../../../components/Loader";
 
 const ThirdStep = ({ data }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const form = useSelector((state) => state.formSlice);
@@ -51,12 +54,14 @@ const ThirdStep = ({ data }) => {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    setIsLoading(true);
     const payload = {
       step: "step3",
       data: values,
     };
     dispatch(updateFormData(payload));
     registerUser({ ...formData, ...values }).then((res) => {
+      setIsLoading(false);
       if (res.success) {
         alert(res?.message);
         navigate("/login");
@@ -121,7 +126,7 @@ const ThirdStep = ({ data }) => {
                   Confirm Password
                 </label>
                 <Field
-                  type="text"
+                  type="password"
                   id="confirmPassword"
                   name="confirmPassword"
                   className="formField"
@@ -134,7 +139,7 @@ const ThirdStep = ({ data }) => {
               </div>
             </div>
           </div>
-          <div className="fixed bottom-0 flex w-[100%] pb-5 justify-center gap-5">
+          <div className="fixed ml-[-32px] bottom-0 flex w-[100%] pb-8 justify-center gap-5">
             <Button
               onClick={() => {
                 previousStep(values);
@@ -146,6 +151,7 @@ const ThirdStep = ({ data }) => {
               Register
             </Button>
           </div>
+          {isLoading && <Loader />}
         </Form>
       )}
     </Formik>

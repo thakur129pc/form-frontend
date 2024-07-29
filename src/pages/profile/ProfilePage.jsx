@@ -1,11 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserDetails } from "../../redux/apis/userApi";
 import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import Loader from "../../components/Loader";
 
 const ProfilePage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const user = useSelector((state) => state.userSlice.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -16,7 +18,9 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     dispatch(fetchUserDetails()).then((res) => {
+      setIsLoading(false);
       if (!res.success) {
         if (res?.message) {
           alert(res.message);
@@ -103,6 +107,7 @@ const ProfilePage = () => {
         </div>
       </div>
       <Button onClick={() => logoutUser()}>Logout</Button>
+      {isLoading && <Loader />}
     </div>
   );
 };

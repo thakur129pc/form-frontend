@@ -4,8 +4,11 @@ import * as Yup from "yup";
 import "./login.scss";
 import { loginUser } from "../../redux/apis/authAPI";
 import Button from "../../components/Button";
+import Loader from "../../components/Loader";
+import { useState } from "react";
 
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const validationSchema = Yup.object({
     username: Yup.string().required("Username is required"),
@@ -18,7 +21,9 @@ const LoginPage = () => {
   };
 
   const handleSubmit = (values, { setSubmitting }) => {
+    setIsLoading(true);
     loginUser(values).then((res) => {
+      setIsLoading(false);
       if (res.success) {
         navigate("/profile");
       } else {
@@ -71,6 +76,7 @@ const LoginPage = () => {
           )}
         </Formik>
       </div>
+      {isLoading && <Loader />}
     </div>
   );
 };
