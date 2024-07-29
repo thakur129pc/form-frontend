@@ -312,7 +312,7 @@ const FirstStep = ({ data }) => {
                     Phone Number
                   </label>
                   <Field
-                    type="text"
+                    type="number"
                     id="phoneNumber"
                     name="phoneNumber"
                     className="formField"
@@ -414,7 +414,7 @@ const FirstStep = ({ data }) => {
                 {/* Current Pin Input Field */}
                 <div className="flex-1 flex-col">
                   <Field
-                    type="text"
+                    type="number"
                     id="currentPin"
                     name="currentAddress.pin"
                     className="formField"
@@ -499,7 +499,7 @@ const FirstStep = ({ data }) => {
                 {/* Permanent Pin Input Field */}
                 <div className="flex-1 flex-col">
                   <Field
-                    type="text"
+                    type="number"
                     id="permanentPin"
                     name="permanentAddress.pin"
                     className="formField"
