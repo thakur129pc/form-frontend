@@ -1,10 +1,8 @@
 import apiClient from "../../utils/axios";
+import { convertToFormData } from "../../utils/formHelpers";
 
 export const registerUser = async (params) => {
-  const formData = new FormData();
-  for (const key in params) {
-    formData.append(key, params[key]);
-  }
+  const formData = convertToFormData(params);
   try {
     const result = await apiClient.post("/register", formData, {
       headers: {

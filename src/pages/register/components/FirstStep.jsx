@@ -536,6 +536,7 @@ const FirstStep = ({ data }) => {
                 onChange={(event) => {
                   handleImageChange(event, setFieldValue);
                 }}
+                className="hidden"
               />
               <ErrorMessage name="photo" component="div" className="error" />
             </div>
