@@ -129,7 +129,7 @@ const FirstStep = ({ data }) => {
         <Form className="flex justify-between flex-col">
           <div className="flex gap-2 flex-wrap-reverse md:gap-14">
             <div className="flex-1">
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Full Name Input Field */}
                 <div className="flex-1 flex-col">
                   <label htmlFor="fullName" className="formLabel">
@@ -211,7 +211,7 @@ const FirstStep = ({ data }) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Father's Name Input Field */}
                 <div className="flex-1 flex-col">
                   <label htmlFor="fatherName" className="formLabel">
@@ -248,7 +248,7 @@ const FirstStep = ({ data }) => {
                 </div>
                 <div className="flex-1"></div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Martial Status Input Field */}
                 <div className="flex-1">
                   <label htmlFor="gender" className="formLabel">
@@ -307,7 +307,7 @@ const FirstStep = ({ data }) => {
                 </div>
                 <div className="flex-1"></div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Phone Number Input Field */}
                 <div className="flex-1 flex-col">
                   <label htmlFor="phoneNumber" className="formLabel">
@@ -344,13 +344,13 @@ const FirstStep = ({ data }) => {
                 </div>
                 <div className="flex-1"></div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Current Address Input Field */}
                 <div className="flex-1 flex-col">
                   <div className="formLabel">Current Address</div>
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-4">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-4">
                 {/* Current Street Input Field */}
                 <div className="flex-1 flex-col">
                   <Field
@@ -382,7 +382,7 @@ const FirstStep = ({ data }) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Current State Input Field */}
                 <div className="flex-1 flex-col">
                   <Field
@@ -429,13 +429,13 @@ const FirstStep = ({ data }) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Permanent Address Input Field */}
                 <div className="flex-1 flex-col">
                   <div className="formLabel">Permanent Address</div>
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-4">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-4">
                 {/* Permanent Street Input Field */}
                 <div className="flex-1 flex-col">
                   <Field
@@ -467,7 +467,7 @@ const FirstStep = ({ data }) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-between flex-col gap-2 md:flex-row md:gap-6 mb-3">
+              <div className="flex justify-between flex-col gap-3 md:flex-row md:gap-6 mb-3">
                 {/* Permanent State Input Field */}
                 <div className="flex-1 flex-col">
                   <Field

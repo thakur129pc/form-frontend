@@ -5,9 +5,12 @@ import Button from "../../components/Button";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import Loader from "../../components/Loader";
+import PreviewFile from "../../components/PreviewFile";
 
 const ProfilePage = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showFile, setShowFile] = useState(false);
+  const [previewIndex, setPreviewIndex] = useState();
   const user = useSelector((state) => state.userSlice.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -104,7 +107,26 @@ const ProfilePage = () => {
         <hr className="w-full border-t-2 border-gray-700" />
         <div className="flex pt-3">
           <h2 className="w-[180px] font-medium t ">Documents :</h2>
-          <p>{user?.email}</p>
+          <div className="flex gap-7 flex-wrap">
+            {user?.documents?.map((file, index) => (
+              <div
+                key={index}
+                className="cursor-pointer"
+                onClick={() => {
+                  setShowFile(true);
+                  setPreviewIndex(index);
+                }}
+              >
+                <img src={"./file.svg"} className="h-6 w-6"></img>
+              </div>
+            ))}
+            {showFile && (
+              <PreviewFile
+                file={user?.documents[previewIndex]}
+                setShowFile={setShowFile}
+              />
+            )}
+          </div>
         </div>
       </div>
       <Button onClick={() => logoutUser()}>Logout</Button>
