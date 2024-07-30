@@ -6,6 +6,7 @@ import { nextStep, updateFormData } from "../../../redux/slices/formSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { convertToBase64 } from "../../../utils/base64";
+import { compressImage } from "../../../utils/imageCompress";
 
 const FirstStep = ({ data }) => {
   const [imagePreview, setImagePreview] = useState(data?.photo || "");
@@ -101,9 +102,10 @@ const FirstStep = ({ data }) => {
   const handleImageChange = async (event, setFieldValue) => {
     const image = event.target.files[0];
     if (image) {
-      const imgBlob = await convertToBase64(image);
+      const compressedImage = await compressImage(image);
+      const imgBlob = await convertToBase64(compressedImage);
       setFieldValue("photo", imgBlob);
-      setImagePreview(URL.createObjectURL(image));
+      setImagePreview(URL.createObjectURL(compressedImage));
     } else {
       setFieldValue("photo", "");
       setImagePreview("");
@@ -517,12 +519,12 @@ const FirstStep = ({ data }) => {
               <div className="formLabel">Photo</div>
               <label htmlFor="photo" className="cursor-pointer">
                 <div className="border-[1.5px] border-gray-600 rounded-lg p-4 flex flex-col justify-center items-center w-[325px] gap-2">
-                  <img
-                    src={imagePreview || "./camera.svg"}
-                    className={
-                      imagePreview ? "top-0 left-0 object-contain" : "h-24 w-24"
-                    }
-                  ></img>
+                  <div className="overflow-clip max-h-[250px]">
+                    <img
+                      src={imagePreview || "./camera.svg"}
+                      className={imagePreview ? "object-contain" : "h-24 w-24"}
+                    ></img>
+                  </div>
                   <p className="formLabel">Upload Image</p>
                 </div>
               </label>
