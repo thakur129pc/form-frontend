@@ -23,9 +23,17 @@ const formSlice = createSlice({
     prevStep: (state) => {
       state.currentStep -= 1;
     },
+    clearData: (state) => {
+      state.formData = {
+        step1: {},
+        step2: {},
+        step3: {},
+      };
+    },
   },
 });
 
-export const { updateFormData, nextStep, prevStep } = formSlice.actions;
+export const { updateFormData, nextStep, prevStep, clearData } =
+  formSlice.actions;
 
 export default formSlice.reducer;

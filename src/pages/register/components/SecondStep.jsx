@@ -160,7 +160,7 @@ const SecondStep = ({ data }) => {
                 )}
               </div>
             </div>
-            <div className="fixed ml-[-32px] bottom-0 flex w-[100%] pb-8 justify-center gap-5">
+            <div className="fixed ml-[-32px] bottom-0 flex w-[100%] p-8 justify-center gap-5">
               <Button
                 onClick={() => {
                   previousStep(values);

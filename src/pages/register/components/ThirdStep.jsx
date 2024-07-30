@@ -2,7 +2,11 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import PropTypes from "prop-types";
 import * as Yup from "yup";
 import Button from "../../../components/Button";
-import { prevStep, updateFormData } from "../../../redux/slices/formSlice";
+import {
+  clearData,
+  prevStep,
+  updateFormData,
+} from "../../../redux/slices/formSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../../redux/apis/formAPI";
@@ -63,6 +67,7 @@ const ThirdStep = ({ data }) => {
       setIsLoading(false);
       if (res.success) {
         alert(res?.message);
+        dispatch(clearData());
         navigate("/login");
       } else {
         if (res?.message) {
@@ -138,7 +143,7 @@ const ThirdStep = ({ data }) => {
               </div>
             </div>
           </div>
-          <div className="fixed ml-[-32px] bottom-0 flex w-[100%] pb-8 justify-center gap-5">
+          <div className="fixed ml-[-32px] bottom-0 flex w-[100%] p-8 justify-center gap-5">
             <Button
               onClick={() => {
                 previousStep(values);
