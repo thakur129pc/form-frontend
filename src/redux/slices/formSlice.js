@@ -24,11 +24,12 @@ const formSlice = createSlice({
       state.currentStep -= 1;
     },
     clearData: (state) => {
-      state.formData = {
-        step1: {},
-        step2: {},
-        step3: {},
-      };
+      (state.currentStep = 1),
+        (state.formData = {
+          step1: {},
+          step2: {},
+          step3: {},
+        });
     },
   },
 });
