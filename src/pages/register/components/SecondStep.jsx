@@ -48,11 +48,11 @@ const SecondStep = ({ data }) => {
     }
     for (const file of filesArray) {
       const fileSizeKB = file.size / 1024;
-      if (fileSizeKB >= 500) {
+      if (fileSizeKB >= 350) {
         alert(
           `File ${
             file.name
-          } is too large. Please upload a PDF smaller than ${500}KB.`
+          } is too large. Please upload a PDF smaller than ${350}KB.`
         );
         return;
       }
