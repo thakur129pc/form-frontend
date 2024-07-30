@@ -2,7 +2,16 @@
 export const flattenObject = (obj, parent = "", res = {}) => {
   for (let key in obj) {
     let propName = parent ? `${parent}.${key}` : key;
-    if (typeof obj[key] === "object" && !Array.isArray(obj[key])) {
+
+    if (Array.isArray(obj[key])) {
+      obj[key].forEach((item, index) => {
+        if (typeof item === "object" && !Array.isArray(item)) {
+          flattenObject(item, `${propName}[${index}]`, res);
+        } else {
+          res[`${propName}[${index}]`] = item;
+        }
+      });
+    } else if (typeof obj[key] === "object" && obj[key] !== null) {
       flattenObject(obj[key], propName, res);
     } else {
       res[propName] = obj[key];
