@@ -46,6 +46,17 @@ const SecondStep = ({ data }) => {
       event.target.value = "";
       return;
     }
+    for (const file of filesArray) {
+      const fileSizeKB = file.size / 1024;
+      if (fileSizeKB >= 500) {
+        alert(
+          `File ${
+            file.name
+          } is too large. Please upload a PDF smaller than ${500}KB.`
+        );
+        return;
+      }
+    }
     if (filesArray.length) {
       const blobFiles = await Promise.all(
         filesArray.map(async (file) => {
